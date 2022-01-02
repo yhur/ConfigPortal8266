@@ -1,25 +1,3 @@
-/*
- *  iotWIFIDevice library to extend and implement the WiFi connected IOT device
- *
- *  Yoonseok Hur
- *
- *  Important C API to be used by the Extension
- *      iotInitDevice();
- *      iotConfigDevice();
- *      webServer.on("/uri", html);    to add the additional custom page
- *      reboot();
- *      reset_config();
- *
- *  Usage Scenario:
- *      Customize these variables to set the Access Point prefix and 
- *      the custom field on the first setup page
- *          String user_html;
- *          char   *ssid_pfix;
- *      run iotInitDevice 
- *      if no config, add custom pages and run iotConfigDevice
- *      else run the 
-*
-*/
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
