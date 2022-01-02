@@ -1,7 +1,8 @@
 Config Portal
 This library provides with the Captive Portal where the user can enter the configuration information, and it saves to the ESP8266 flash filesystem.
 On next and following boot, the stored information will used to set up the devic
-<pre>
+
+```c
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ConfigPortal.h>
@@ -33,4 +34,4 @@ void setup() {
 
 void loop() {
 }
-</pre>
+```
