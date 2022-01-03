@@ -44,8 +44,28 @@ String redirect_html = ""
 
 void (*userConfigLoop)() = NULL;
 
+void byte2buff(char* msg, byte* payload, unsigned int len) {
+    unsigned int i, j;
+    for (i=j=0; i < len ;) {
+        msg[j++] = payload[i++];
+    }
+    msg[j] = '\0';
+}
+
+void save_config_json(){
+    char cfgBuffer[JSON_BUFFER_LENGTH];
+    serializeJson(cfg, cfgBuffer);
+    File f = LittleFS.open(cfgFile, "w");
+    f.print(cfgBuffer);
+    f.close();
+}
+
+void reset_config() {
+	deserializeJson(cfg, "{meta:{}}");
+    save_config_json();
+}
+
 IRAM_ATTR void reboot() {
-    WiFi.disconnect();
     ESP.restart();
 }
 
@@ -126,14 +146,6 @@ void maskConfig(char* buff) {
     serializeJson(temp_cfg, buff, JSON_BUFFER_LENGTH);
 }
 
-void save_config_json(){
-    char cfgBuffer[JSON_BUFFER_LENGTH];
-    serializeJson(cfg, cfgBuffer);
-    File f = LittleFS.open(cfgFile, "w");
-    f.print(cfgBuffer);
-    f.close();
-}
-
 void saveEnv() {
     int args = webServer.args();
     for (int i = 0; i < args ; i++){
@@ -154,10 +166,11 @@ void saveEnv() {
     webServer.send(200, "text/html", redirect_html);
 }
 
-void initDevice() {
-    if(!LittleFS.begin()) {
-        LittleFS.format();
-    }
+void loadConfig() {
+    // check Factory Reset Request and reset if requested
+    // and initialize
+
+    if(!LittleFS.begin()) { LittleFS.format(); }
     pinMode(RESET_PIN, INPUT_PULLUP);
     if( digitalRead(RESET_PIN) == 0 ) {
         unsigned long t1 = millis();
@@ -165,18 +178,9 @@ void initDevice() {
             delay(500);
             Serial.print(".");
         }
-        if (millis() - t1 > 5000) {
-	        deserializeJson(cfg, "{meta:{}}");      // Factory Reset
-            save_config_json();
-        }
+        if (millis() - t1 > 5000) { reset_config(); }      //Factory Reset
     }
     attachInterrupt(RESET_PIN, reboot, FALLING);
-}
-
-void loadConfig() {
-    // check Factory Reset Request and reset if requested
-    // and initialize
-    initDevice();
 
     if (LittleFS.exists(cfgFile)) {
         File f = LittleFS.open(cfgFile, "r");
