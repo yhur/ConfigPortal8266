@@ -57,36 +57,7 @@ String redirect_html = ""
     "<html><head><meta http-equiv='refresh' content='0; URL=http:/pre_boot' /></head>"
     "<body><p>Redirecting</body></html>";
 
-<<<<<<< HEAD:src/ConfigPortal8266.h
 String postSave_html;
-=======
-void (*userConfigLoop)() = NULL;
-
-void byte2buff(char* msg, byte* payload, unsigned int len) {
-    unsigned int i, j;
-    for (i=j=0; i < len ;) {
-        msg[j++] = payload[i++];
-    }
-    msg[j] = '\0';
-}
-
-void save_config_json(){
-    char cfgBuffer[JSON_BUFFER_LENGTH];
-    serializeJson(cfg, cfgBuffer);
-    File f = LittleFS.open(cfgFile, "w");
-    f.print(cfgBuffer);
-    f.close();
-}
-
-void reset_config() {
-	deserializeJson(cfg, "{meta:{}}");
-    save_config_json();
-}
-
-IRAM_ATTR void reboot() {
-    ESP.restart();
-}
->>>>>>> 8e0097d84a7b05027147c6973ef40013c1f6ea59:src/ConfigPortal.h
 
 void (*userConfigLoop)() = NULL;
 
@@ -143,7 +114,6 @@ void getFloatValue(JsonObject &o, char* n, float* v) {
     }
 }
 
-<<<<<<< HEAD:src/ConfigPortal8266.h
 void save_config_json(){
     char cfgBuffer[JSON_BUFFER_LENGTH];
     serializeJson(cfg, cfgBuffer);
@@ -154,33 +124,9 @@ void save_config_json(){
 
 void reset_config() {
 	deserializeJson(cfg, "{meta:{}}");
-=======
-void maskConfig(char* buff) {
-    DynamicJsonDocument temp_cfg = cfg;
-    if(cfg.containsKey("w_pw")) temp_cfg["w_pw"] = "********";
-    if(cfg.containsKey("token")) temp_cfg["token"] = "********";
-    serializeJson(temp_cfg, buff, JSON_BUFFER_LENGTH);
-}
-
-void saveEnv() {
-    int args = webServer.args();
-    for (int i = 0; i < args ; i++){
-        if (webServer.argName(i).indexOf(String("meta.")) == 0 ) {
-            String temp = webServer.arg(i);
-            temp.trim();
-            cfg["meta"][webServer.argName(i).substring(5)] = temp;
-        } else {
-            String temp = webServer.arg(i);
-            temp.trim();
-            cfg[webServer.argName(i)] = temp;
-        }
-    }
-    cfg["config"] = "done";
->>>>>>> 8e0097d84a7b05027147c6973ef40013c1f6ea59:src/ConfigPortal.h
     save_config_json();
 }
 
-<<<<<<< HEAD:src/ConfigPortal8266.h
 void maskConfig(char* buff) {
     DynamicJsonDocument temp_cfg = cfg;
     if(cfg.containsKey("w_pw")) temp_cfg["w_pw"] = "********";
@@ -197,13 +143,6 @@ void loadConfig() {
     // check Factory Reset Request and reset if requested or load the config
     if(!LittleFS.begin()) { LittleFS.format(); }    // before the reset_config and reading
 
-=======
-void loadConfig() {
-    // check Factory Reset Request and reset if requested
-    // and initialize
-
-    if(!LittleFS.begin()) { LittleFS.format(); }
->>>>>>> 8e0097d84a7b05027147c6973ef40013c1f6ea59:src/ConfigPortal.h
     pinMode(RESET_PIN, INPUT_PULLUP);
     if( digitalRead(RESET_PIN) == 0 ) {
         unsigned long t1 = millis();
@@ -211,13 +150,9 @@ void loadConfig() {
             delay(500);
             Serial.print(".");
         }
-<<<<<<< HEAD:src/ConfigPortal8266.h
         if (millis() - t1 > 5000) {
             reset_config();             // Factory Reset
         }
-=======
-        if (millis() - t1 > 5000) { reset_config(); }      //Factory Reset
->>>>>>> 8e0097d84a7b05027147c6973ef40013c1f6ea59:src/ConfigPortal.h
     }
     attachInterrupt(RESET_PIN, reboot, FALLING);
 
