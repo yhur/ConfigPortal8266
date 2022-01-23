@@ -5,6 +5,10 @@ With this library, the developer can create a WiFi ESP8266 device which
 2. boot with the stored SSID/password and other programmed information if configured already.
 3. connects to the WiFi and run the loop function
 
+This is the screenshot of a sample captive portal.
+
+<img width="381" alt="Captive Portal" src="https://user-images.githubusercontent.com/13171662/150663373-ffb1d4e9-e128-41a6-9231-3cb9f6f495f7.png">
+
 # How to use the ConfigPortal8266
 You can create a PlatformIO project with the example directory and modify the src/main.cpp for your purpose and build it.
 
