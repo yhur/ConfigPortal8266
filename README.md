@@ -1,9 +1,14 @@
 # Config Portal
 
-With this library, the developer can create a WiFi ESP8266 device which provides with the Captive Portal if not configured, where the user can enter the configuration information and save to the ESP8266 flash filesystem.
+With this library, the developer can create a WiFi ESP8266 device which 
+1. provides with the Captive Portal if not configured, where the user can enter the configuration information such as SSID/password, and save to the ESP8266 flash filesystem.
+2. boot with the stored SSID/password and other programmed information if configured already.
+3. connects to the WiFi and run the loop function
 
-On next and following boot, the stored information will used to set up the WiFi connection and other settings for the device.
+# How to use the ConfigPortal8266
+You can create a PlatformIO project with the example directory and modify the src/main.cpp for your purpose and build it.
 
+## src/main.cpp 
 The following code is the example to use the library. 
 ```c
 #include <Arduino.h>
@@ -41,6 +46,7 @@ void loop() {
 }
 ```
 
+## customization
 If additional configuration parameter is needed, you can modify the `user_config_html` for your variable, and handle the variable as shown below. The custom varialbe here is yourVar in the `user_html` and handling in setup code as below
 
 In the global section.
@@ -54,5 +60,3 @@ In the functions.
     Serial.println( (const char*)cfg["yourVar"]);
 ```
 
-# How to use the example code
-You can create a platformio project with the example directory and modify the src/main.cpp for your purpose and build it.
