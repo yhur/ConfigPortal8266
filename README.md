@@ -41,9 +41,18 @@ void loop() {
 }
 ```
 
-If additional configuration parameter is needed, you can modify the `user_html` as above, and handle the variable as above example. The custom varialbe here is yourVar in the `user_html` and handling in setup code as below
+If additional configuration parameter is needed, you can modify the `user_config_html` for your variable, and handle the variable as shown below. The custom varialbe here is yourVar in the `user_html` and handling in setup code as below
 
+In the global section.
+```c
+String              user_config_html = ""
+    "<p><input type='text' name='yourVar' placeholder='Your Variable'>";
+```
+
+In the functions.
 ```c
     Serial.println( (const char*)cfg["yourVar"]);
 ```
 
+# How to use the example code
+You can create a platformio project with the example directory and modify the src/main.cpp for your purpose and build it.
