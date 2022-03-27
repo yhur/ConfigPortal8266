@@ -1,9 +1,11 @@
 # Config Portal
 
 With this library, the developer can create a WiFi ESP8266 device which 
-1. provides with the Captive Portal if not configured, where the user can enter the configuration information such as SSID/password, and save to the ESP8266 flash filesystem.
-2. boot with the stored SSID/password and other programmed information if configured already.
-3. connects to the WiFi and run the loop function
+1. on power on, it provides with the Captive Portal if not configured, where the user can enter the configuration information such as SSID/password, and save to the ESP8266 flash filesystem.
+2. or boots with the stored SSID/password and other programmed information if configured already.
+3. connects to the WiFi and run the programmed setup function
+4. it will serve as written in the loop function
+5. (factory reset) if needed, you can connect GPIO0 to ground for more than 5 seconds, then the configuration will be deleted and the device can be reconfigured for the WiFi.
 
 This is the screenshot of a sample captive portal.
 
