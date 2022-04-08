@@ -72,8 +72,6 @@ In addition to the Captive Portal configuration capability, it has feature that 
 The format of the configuration is as follows, and you this under the folder named 'data' to upload.
 <pre>
 {
-   "meta":{
-   },
    "ssid":"APID",
    "w_pw":"APPassword",
    "yourVar":"sample data",
