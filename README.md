@@ -66,3 +66,17 @@ In the functions.
     Serial.println( (const char*)cfg["yourVar"]);
 ```
 
+## Configuration Upload Feature
+In addition to the Captive Portal configuration capability, it has feature that enables, you can upload the configuration using the SPIFFS/LittleFS file upload functions in both of Arduino IDE extension and the VSCode/PlatformIO.
+
+The format of the configuration is as follows, and you this under the folder named 'data' to upload.
+<pre>
+{
+   "meta":{
+   },
+   "ssid":"APID",
+   "w_pw":"APPassword",
+   "yourVar":"sample data",
+   "config":"done"
+}
+</pre>
