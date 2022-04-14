@@ -67,7 +67,7 @@ In the functions.
 ```
 
 ## Configuration Upload Feature
-In addition to the Captive Portal configuration capability, it has feature that enables, you can upload the configuration using the SPIFFS/LittleFS file upload functions in both of Arduino IDE extension and the VSCode/PlatformIO.
+In addition to the Captive Portal configuration capability, it has a feature that enables you to upload the configuration using the LittleFS file upload functions in both of Arduino IDE extension and the VSCode/PlatformIO.
 
 The format of the configuration is as follows, and you this under the folder named 'data' to upload.
 <pre>
