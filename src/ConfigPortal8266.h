@@ -19,7 +19,7 @@
 #include <ArduinoJson.h>
 #include <LittleFS.h>
 
-#define             JSON_BUFFER_LENGTH 1024
+#define             JSON_BUFFER_LENGTH 2048
 StaticJsonDocument<JSON_BUFFER_LENGTH> cfg;
 
 ESP8266WebServer    webServer(80);
