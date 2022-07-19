@@ -116,10 +116,8 @@ void getFloatValue(JsonObject &o, char* n, float* v) {
 }
 
 void save_config_json(){
-    char cfgBuffer[JSON_CHAR_LENGTH];
-    serializeJson(cfg, cfgBuffer);
     File f = LittleFS.open(cfgFile, "w");
-    f.print(cfgBuffer);
+    serializeJson(cfg, f);
     f.close();
 }
 
@@ -158,15 +156,11 @@ void loadConfig() {
     attachInterrupt(RESET_PIN, reboot, FALLING);
 
     if (LittleFS.exists(cfgFile)) {
+        String buff;
         File f = LittleFS.open(cfgFile, "r");
-        char buff[512];
-        int i = 0;
-        while(f.available()) {
-            buff[i++] = f.read();
-        }
+        DeserializationError error = deserializeJson(cfg, f.readString());
         f.close();
 
-        DeserializationError error = deserializeJson(cfg, String(buff));
 	    if (error) {
 	        deserializeJson(cfg, "{meta:{}}");
 	    } else {
@@ -210,15 +204,12 @@ void pre_reboot() {
 
 bool getHTML(String* html, char* fname) {
     if (LittleFS.exists(fname)) {
+        String buff;
         File f = LittleFS.open(fname, "r");
-        char buff[20480];
-        int i = 0;
-        while(f.available()) {
-            buff[i++] = f.read();
-        }
-        buff[i] = '\0';
+        buff = f.readString();
+        buff.trim();
         f.close();
-        *html = String(buff);
+        *html = buff;
         return true;
     } else {
         return false;
