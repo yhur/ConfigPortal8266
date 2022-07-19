@@ -20,6 +20,7 @@
 #include <LittleFS.h>
 
 #define             JSON_BUFFER_LENGTH 2048
+#define             JSON_CHAR_LENGTH 1024
 StaticJsonDocument<JSON_BUFFER_LENGTH> cfg;
 
 ESP8266WebServer    webServer(80);
@@ -115,7 +116,7 @@ void getFloatValue(JsonObject &o, char* n, float* v) {
 }
 
 void save_config_json(){
-    char cfgBuffer[JSON_BUFFER_LENGTH];
+    char cfgBuffer[JSON_CHAR_LENGTH];
     serializeJson(cfg, cfgBuffer);
     File f = LittleFS.open(cfgFile, "w");
     f.print(cfgBuffer);
@@ -131,7 +132,7 @@ void maskConfig(char* buff) {
     DynamicJsonDocument temp_cfg = cfg;
     if(cfg.containsKey("w_pw")) temp_cfg["w_pw"] = "********";
     if(cfg.containsKey("token")) temp_cfg["token"] = "********";
-    serializeJson(temp_cfg, buff, JSON_BUFFER_LENGTH);
+    serializeJson(temp_cfg, buff, JSON_CHAR_LENGTH);
 }
 
 IRAM_ATTR void reboot() {
@@ -170,7 +171,7 @@ void loadConfig() {
 	        deserializeJson(cfg, "{meta:{}}");
 	    } else {
 	        Serial.println("CONFIG JSON Successfully loaded");
-	        char maskBuffer[JSON_BUFFER_LENGTH];
+	        char maskBuffer[JSON_CHAR_LENGTH];
 	        maskConfig(maskBuffer);
 	        Serial.println(String(maskBuffer));
 	    }
