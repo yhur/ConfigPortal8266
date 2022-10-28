@@ -52,7 +52,7 @@ void loop() {
 }
 ```
 
-## customization
+## Additional Configuration Parameter
 If additional configuration parameter is needed, you can modify the `user_config_html` for your variable, and handle the variable as shown below. The custom varialbe here is yourVar in the `user_html` and handling in setup code as below
 
 In the global section.
@@ -69,7 +69,7 @@ In the functions.
 ## Configuration Upload Feature
 In addition to the Captive Portal configuration capability, it has a feature that enables you to upload the configuration using the LittleFS file upload functions in both of Arduino IDE extension and the VSCode/PlatformIO.
 
-The format of the configuration is as follows, and you this under the folder named 'data' to upload.
+The format of the configuration is as follows, and you place this under the folder named 'data' to upload.
 <pre>
 {
    "ssid":"APID",
@@ -78,3 +78,4 @@ The format of the configuration is as follows, and you this under the folder nam
    "config":"done"
 }
 </pre>
+Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image' tool.
