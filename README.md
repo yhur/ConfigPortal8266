@@ -52,7 +52,7 @@ void loop() {
 }
 ```
 
-## Additional Configuration Parameter
+## Custom Configuration Parameter
 If additional configuration parameter is needed, you can modify the `user_config_html` for your variable, and handle the variable as shown below. The custom varialbe here is yourVar in the `user_html` and handling in setup code as below
 
 In the global section.
