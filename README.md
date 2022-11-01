@@ -88,3 +88,18 @@ The format of the configuration is as follows, and you place this under the fold
 Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image' tool. Note: It uses the serial connection, so you need to stop the Serial Monitor if running.
 
 <img width="500" alt="Upload Filesystem Image" src="https://user-images.githubusercontent.com/13171662/199135635-ab11cdb4-3908-4a57-ad92-a3e00657f869.png">
+
+# Advanced Use
+There is one custom user exit call back function pointer and one optional html file `postSave.html`.
+
+* If you want/need to provide some intermediate function during the configuration, you can implement a function and assign it to `userConfigLoop` function pointer.
+```c
+    // *** If no "config" is found or "config" is not "done", run configDevice ***
+    if(!cfg.containsKey("config") || strcmp((const char*)cfg["config"], "done")) {
+        userConfigLoop = &customConfigLoop;
+        configDevice();
+    }
+```
+For example, if you want to update the sensor data on OLED or if you need to provide some information to the browser through the websocket even during the configuration process.
+
+* If you want/need to show the post configuration information, you can create a html file with name `postSave.html` and place under data folder, this page will be sent to the browser when the user submit the configuation information.
