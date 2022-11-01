@@ -92,7 +92,7 @@ Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image'
 # Advanced Use
 There is one custom user exit call back function pointer and one optional html file `postSave.html`.
 
-* If you want/need to provide some intermediate function during the configuration, you can implement a function and assign it to `userConfigLoop` function pointer.
+* If you want/need to provide some intermediate function to run during the configuration stage, you can implement a function and assign it to `userConfigLoop` function pointer.
 ```c
     // *** If no "config" is found or "config" is not "done", run configDevice ***
     if(!cfg.containsKey("config") || strcmp((const char*)cfg["config"], "done")) {
