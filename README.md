@@ -82,7 +82,7 @@ The format of the configuration is as follows, and you place this under the fold
 }
 </pre>
 
-<img width="381" alt="Config.json" src="https://user-images.githubusercontent.com/13171662/199135726-7cd44226-7f76-4d32-98d6-ae5ceb9d016a.jpg">
+<img width="381" alt="config.json" src="https://user-images.githubusercontent.com/13171662/199135726-7cd44226-7f76-4d32-98d6-ae5ceb9d016a.jpg">
 
 
 Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image' tool. Note: It uses the serial connection, so you need to stop the Serial Monitor if running.
