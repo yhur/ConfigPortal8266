@@ -59,14 +59,17 @@ In the global section.
 ```c
 String              user_config_html = ""
     "<p><input type='text' name='yourVar' placeholder='Your Variable'>";
+char                yourVar[50];
 ```
 
-In the functions.
+To read and set the configuration parameter to a variable(Refer to the ArduinoJson library for type handling).
 ```c
-    Serial.println( (const char*)cfg["yourVar"]);
+    sprintf(yourVar, (const char*)cfg["yourVar"]);
 ```
 
-## Configuration Upload Feature
+![스크린샷 2022-11-01 오전 9 37 26](https://user-images.githubusercontent.com/13171662/199134241-0fecd9a7-2978-4be4-87ab-d8d2db8b66ba.png)
+
+## Configuration File Upload Feature
 In addition to the Captive Portal configuration capability, it has a feature that enables you to upload the configuration using the LittleFS file upload functions in both of Arduino IDE extension and the VSCode/PlatformIO.
 
 The format of the configuration is as follows, and you place this under the folder named 'data' to upload.
@@ -78,4 +81,10 @@ The format of the configuration is as follows, and you place this under the fold
    "config":"done"
 }
 </pre>
-Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image' tool.
+
+<img width="381" alt="Config.json" src="https://user-images.githubusercontent.com/13171662/199135726-7cd44226-7f76-4d32-98d6-ae5ceb9d016a.jpg">
+
+
+Once `config.json` is ready, you can upload with PIO's 'Upload Filesystem Image' tool. Note: It uses the serial connection, so you need to stop the Serial Monitor if running.
+
+<img width="500" alt="Upload Filesystem Image" src="https://user-images.githubusercontent.com/13171662/199135635-ab11cdb4-3908-4a57-ad92-a3e00657f869.png">
