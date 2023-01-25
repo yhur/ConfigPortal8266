@@ -19,7 +19,7 @@
 #include <ArduinoJson.h>
 #include <LittleFS.h>
 
-#define             JSON_BUFFER_LENGTH 2048
+#define             JSON_BUFFER_LENGTH 3072
 #define             JSON_CHAR_LENGTH 1024
 StaticJsonDocument<JSON_BUFFER_LENGTH> cfg;
 
