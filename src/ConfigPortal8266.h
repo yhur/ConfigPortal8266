@@ -70,51 +70,6 @@ void byte2buff(char* msg, byte* payload, unsigned int len) {
     msg[j] = '\0';
 }
 
-void getULongValue(JsonObject &o, char* n, unsigned long* v) {
-    if (o.containsKey(n)) {
-        *v = 0;
-        JsonVariant m = o.getMember(n);
-        if(m.is<String>()) {
-            String s = m.as<String>();
-            if (s.length() > 0) {
-                *v = m.as<String>().toInt();
-            }
-        } else if(m.is<int>()) { 
-            *v = m.as<int>();
-        }
-    }
-}
-
-void getIntValue(JsonObject &o, char* n, int* v) {
-    if (o.containsKey(n)) {
-        *v = 0;
-        JsonVariant m = o.getMember(n);
-        if(m.is<String>()) {
-            String s = m.as<String>();
-            if (s.length() > 0) {
-                *v = m.as<String>().toInt();
-            }
-        } else if(m.is<int>()) { 
-            *v = m.as<int>();
-        }
-    }
-}
-
-void getFloatValue(JsonObject &o, char* n, float* v) {
-    *v = 0;
-    if (o.containsKey(n)) {
-        JsonVariant m = o.getMember(n);
-        if(m.is<String>()) {
-            String s = m.as<String>();
-            if (s.length() > 0) {
-                *v = m.as<String>().toFloat();
-            }
-        } else if(m.is<float>()) { 
-            *v = m.as<float>();
-        }
-    }
-}
-
 void save_config_json(){
     File f = LittleFS.open(cfgFile, "w");
     serializeJson(cfg, f);
