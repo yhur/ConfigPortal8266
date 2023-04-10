@@ -32,7 +32,7 @@ extern              String user_config_html;
 extern char         *ssid_pfix;
 
 String html_begin = ""
-    "<html><head><title>IOT Device Setup</title></head>"
+    "<html><head><meta charset='UTF-8'><title>IOT Device Setup</title></head>"
     "<body><center><h1>Device Setup Page</h1>"
         "<style>"
             "input {font-size:3em; width:90%; text-align:center;}"
